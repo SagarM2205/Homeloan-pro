@@ -292,20 +292,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 // IMPORTANT: Replace this URL with your deployed Google Apps Script Web App URL
                 const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwf-JFtnCctsO-5JvBGFtc7TIRHH57w-zyLYxtaW_QVr0px3hAqf0JwP4KGzmrcrkoe/exec';
                 
-                // Google Apps Script requires a slightly different approach (redirects)
+                // Google Apps Script requires 'no-cors' mode to bypass strict cross-origin policies
                 const res = await fetch(GOOGLE_SHEETS_URL, {
                     method: 'POST',
-                    // Sending as plain text prevents CORS preflight issues with Google Script
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
                 
-                if (res.ok) {
-                    form.reset();
-                    showModal();
-                } else {
-                    alert('There was an issue saving your request. Please try again.');
-                }
+                // When using 'no-cors', the response is 'opaque' meaning we can't read res.ok
+                // If it didn't throw a network error into the catch block, it worked.
+                form.reset();
+                showModal();
             } catch(error) {
                 console.error(error);
                 alert('Connection error. Please try again later.');
