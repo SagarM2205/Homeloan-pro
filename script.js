@@ -273,6 +273,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         form.addEventListener('submit', async e => {
             e.preventDefault();
+
+            // --- Honeypot / Bot Shield ---
+            const botField = form.querySelector('[name="bot_verify"]');
+            if (botField && botField.value) {
+                console.warn("Automation detected.");
+                // Silently fake success to trick the bot
+                form.reset();
+                showModal();
+                return;
+            }
+
             const btn = form.querySelector('button[type="submit"]');
             const orig = btn.innerHTML;
             btn.innerHTML = 'Processing...';

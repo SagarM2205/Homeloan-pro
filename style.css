@@ -529,6 +529,17 @@ em { font-family: var(--f-serif); font-style: italic; color: var(--teal-500); }
     margin-bottom: 16px;
 }
 
+.field--bot {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    height: 0; width: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
 .card__note {
     display: flex;
     align-items: center;
@@ -1994,6 +2005,10 @@ body.theme-transitioning *::after {
     border-color: rgba(12,124,110,0.2);
 }
 
+[data-theme="dark"] .section-head__title em {
+    color: var(--teal-400);
+}
+
 /* Bento cards & Service cards */
 [data-theme="dark"] .bento__card,
 [data-theme="dark"] .service-card {
@@ -2158,6 +2173,11 @@ body.theme-transitioning *::after {
 
 [data-theme="dark"] .field select:focus {
     background-color: var(--cream-200);
+}
+
+[data-theme="dark"] .field select option {
+    background-color: var(--cream-100);
+    color: var(--ink-800);
 }
 
 /* Trust avatar borders */
