@@ -290,13 +290,20 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.disabled = true;
             btn.style.opacity = '0.7';
 
+            // ─── UTM Detection (Senior level attribution) ───
+            const params = new URLSearchParams(window.location.search);
+            const source = params.get('utm_source') || params.get('source') || 'Organic';
+            const campaign = params.get('utm_campaign') || 'Direct';
+
             // Extract data robustly from both forms
             const payload = {
                 name: form.querySelector('[id$="-name"]')?.value || '',
                 phone: form.querySelector('[id$="-phone"]')?.value || '',
                 type: form.querySelector('[id$="-type"]')?.value || 'Home Loan',
                 income: form.querySelector('[id$="-income"]')?.value || '',
-                loanNeeded: form.querySelector('[id$="-amount"], [id$="-loan"]')?.value || ''
+                loanNeeded: form.querySelector('[id$="-amount"], [id$="-loan"]')?.value || '',
+                source: `${source} (${campaign})`,
+                url: window.location.href
             };
 
             try {
