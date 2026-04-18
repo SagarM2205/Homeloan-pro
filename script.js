@@ -1,5 +1,5 @@
 /* ============================================
-   HomeLoan Pro — Warm Modern Interactivity
+   LOANWALA — Warm Modern Interactivity
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {

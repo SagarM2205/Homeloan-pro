@@ -1,5 +1,5 @@
 // ===============================================
-// SENIOR LEVEL: GOOGLE SHEETS WEBHOOK (V2)
+// SENIOR LEVEL: LOANWALA WEBHOOK (V2)
 // FEATURES: Daily Partitioning, UTM Tracking, Lead IDs
 // ===============================================
 
@@ -10,6 +10,8 @@
  * 4. Access: "Anyone".
  * 5. UPDATE the URL in your script.js.
  */
+
+const NOTIFICATION_EMAIL = "test66789656@gmail.com"; // <-- Enter your email here!
 
 function doPost(e) {
   try {
@@ -35,9 +37,9 @@ function doPost(e) {
     const data = JSON.parse(e.postData.contents);
     
     // 4. Generate a more professional Reference ID
-    // Example: HLP-240407-1234
+    // Example: LW-240407-1234
     const idSuffix = Math.floor(Math.random() * 9000) + 1000;
-    const leadId = "HLP-" + Utilities.formatDate(now, ss.getSpreadsheetTimeZone(), "yyMMdd") + "-" + idSuffix;
+    const leadId = "LW-" + Utilities.formatDate(now, ss.getSpreadsheetTimeZone(), "yyMMdd") + "-" + idSuffix;
 
     const rowData = [
       leadId,
@@ -70,7 +72,7 @@ function doPost(e) {
 }
 
 function sendLeadEmail(data, leadId) {
-  const emailAddress = Session.getActiveUser().getEmail(); 
+  const emailAddress = NOTIFICATION_EMAIL; 
   const subject = `🚀 [NEW LEAD] ${leadId}: ${data.name} (${data.type})`;
   
   const htmlBody = `
